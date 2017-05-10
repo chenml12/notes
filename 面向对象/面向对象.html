@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			面向对象：
+					一种对现实世界的理解和抽象的方法，是计算机编程技术发展到一定阶段的产物。
+					一种编程思想，简单说就是把具有相同特征的东西归为一类并且返回一个对象，这个对象的特征挂在构造函数的原型上。
+			面向对象的特征：
+					抽象
+					封装
+					继承
+			
+			构造函数（工厂函数）：构造对象的函数（函数return一个对象）；//实例（实例化对象|过程）；
+			
+			
+			挂在对象下的变量叫属性；
+			挂在对象下的函数叫方法；
+			非空对象才能加属性；
+						如：var arr = [];
+							arr.a = 10;
+						
+						arr.fn = function(){
+							alert('1')
+						}
+						arr.fn();//这个就是调用arr下的方法，不叫函数；
+		
+		
+		
+			new:运算符
+				专门运算函数
+				1、如果不传参就是调用函数；如：new fn;调用函数；
+				2、new fn();
+					前面写new，fn函数里不写renturn时，那么默认fn整个函数就是个对象，fn函数里的this指向fn{}本身；
+					如果fn函数里写了return，return后是对象类型，那么fn{}函数的返回值就是那个对象；如果return后不是对象类型，那么fn{}函数的返回值就是new后的那个对象（即fn{}）;			
+			
+			（只有用new写的才能叫做实例化对象(即p)及构造函数(即fn)。var p = new fn(obj);）
+			
+			原型:
+					prototype；
+					每个函数都自带的属性，
+					prototype的值为对象，其下有许多方法；
+					prototype只给构造函数的实例化对象使用。
+						fn.prototype.say = function(){
+							
+						}
+				js有个特性：
+						如果实例化对象上没有某个属性或方法，那么会到构造函数的原型protitype下去找。
+						
+			原型链：
+					_proto_
+					对象下一定有原型链，没有原型；函数下才有原型；
+					实例化对象下的原型链  等同于  构造函数的原型；（p._proto_ === fn.prototype）
+					原型链是实例化对象与构造函数原型的桥梁;
+					通过原型链找构造函数找原型；
+			顺序：实例化对象自己->构造函数原型->object;
+		-->
+		<script>
+			/*function fn(name,age,word){//工厂函数（构造函数）
+				var obj = {};//原材料
+				//加工
+				obj.name = name;
+				obj.age = age;
+				obj.say = function(){
+					//alert(word)
+					console.log(this)
+				}
+				return obj;
+			}
+			var p = fn('张三',18,'你好！');
+			p.say();*/
+			
+			/*function fn(name,age,word){//工厂函数（构造函数）
+				//var obj = {};//原材料
+				//加工
+				this.name = name;
+				this.age = age;
+				this.say = function(){
+					//alert(word)
+					console.log(this)
+				}
+				//return obj;
+			}
+			var p = new fn('张三',18,'你好！');
+			console.log(p);
+			function tab(){
+				alert(1)
+			}
+			new tab;*/
+			
+			function fn(name){
+				
+			}
+			Object.prototype.say = function(){
+				alert('东方红')
+			}
+			var p = new fn('咱三');
+			p.say()
+			console.dir(p);
+		</script>
+	</body>
+</html>
