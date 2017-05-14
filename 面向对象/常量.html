@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			var 或 let :是变量；
+			
+			const : 常量；
+						const a =1;定义常量后是不能被修改的，要是继续写a=2修改，就会报错；
+						const、let是没有预解析的;
+						const声明必须得赋值，不然会报错；
+						同一个作用域下 let 与  const 不能二次声明：
+								如：const a=1;const a=2;会报错；
+								
+			hasOwnProperty() :
+					对象.hasOwnProperty(属性名)；
+					查看某个属性是不是这个对象自身的属性；
+					返回值是布尔值：是，true；否,false;
+					如：p.hasOwnProperty('name') -> true:就是自己的；
+						要是say()函数写在prototype下(成为共有的东西)，那么p.hasOwnProperty('say')的结果就是false;
+			
+			
+			constructor:
+					对象.constructor;
+					查看某个对象是哪个构造函数构造出来的；(虚的，提供查找构造函数的线索，只能作为参考，因为constructor本身容易被修改，所以在可能被修改时，人为的写constructor的正确属性,方便维护)
+					var arr = [];
+					console.log(arr.constructor == Array) -> true;
+					
+			
+			instanceof :
+					二元运算符；
+					运算某个对象是否是某个构造函数构造出来的；
+					对象 instanceof 构造函数：返回值是布尔值
+					右值是不是左值老爹；
+					function Fn(){
+						
+					}
+					var f = new Fn;
+					console.log(f instanceof Fn) -> true;
+			
+			
+			window下是有name属性的，即window.name一直都存在，如：
+						alert(this.name) -> 结果为：(空);不是undefined;
+						
+			
+			ES6可以这样写：
+					class Person{
+						//constructor是必须写的
+						constructor(name,age){
+							this.name = name;
+							this.age = age;
+							this.say = function(){
+								alert('优先级高'); // console.log(p.say == p2.say) -> false;此处方法是私有的
+							}
+						}
+						//正常的say函数
+						say(){
+							alert('优先级低'); // console.log(p.say == p2.say) -> true;此处方法是公用的
+						}
+						//其他函数
+						...
+					}
+					var p = new Person('张三',80);
+					var p2 = new Person('李四',80);
+					p.say();//alert结果为：'优先级高'
+					
+		-->
+		<script>
+			function Person(name){
+				this.name = name;
+			}
+			Person.prototype = {
+				//人为修正constructor指向为Person，不然指向就为Object了；
+				constructor:Person,
+				say:function(){
+					alert(1234);
+				},
+				running:function(){
+					alert(2)
+				}
+			}
+			var p = new Person('张三');
+			console.log(p.constructor)
+			
+		</script>
+	</body>
+</html>
