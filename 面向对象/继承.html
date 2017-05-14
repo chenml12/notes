@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			this :
+				事件中的this指向该事件的对象；
+				方法下的this默认为绑定此方法的对象；
+				new fn()；new的函数this默认指向fn{}对象；（内置对象的方法是不能new的，自己写的才能用new）
+				定时器可以调用函数 如:setTimeout(fn,100)
+				
+			继承：
+				自身有父辈的一些特征，也有自己的一些特征；
+				1、拷贝继承：
+						1、属性继承：调用父类的构造函数且使用call来修改this指向；
+						2、方法继承：将父类的原型上的方法通过for in赋值给子类
+				
+					赋值：简单类型的，是赋值；
+					
+					赋址(对象引用)：只要不是简单类型的，都是赋址（{}、[]），引用的都是同一个空间的内容；如:
+							var arr =[1,2,3];
+							var arr2 = arr;
+							arr2.push(4);
+							那么： arr2 = [1,2,3,4]
+									arr = [1,2,3,4]
+							（for in 可以解决浅拷贝的 赋址 问题）
+							
+				2、类式继承：
+						1、属性继承：调用父类的构造函数并使用call来修改this指向；
+						2、方法继承：
+							function Fn(){};
+							fn.prototype = drag.ptototype;
+							var ph = new fn();
+							drag2.ptototype = ph;
+							那么修改drag2下的属性及方法时，就不会影响到drag
+		-->
+	</body>
+</html>
