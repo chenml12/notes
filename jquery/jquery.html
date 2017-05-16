@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jquery</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*1.认识jquery
+			js的类库（对象库）
+			
+			就不用考虑兼容问题
+			
+			强大的选择器
+			
+			吃的少干的多
+			
+			操作DOM、ajax（数据交互）
+			
+		jQuery是一个快速，小巧，功能丰富的JavaScript库。通过使用多种浏览器的易于使用的API，可以使HTML文档遍历和操作，事件处理，动画和Ajax更简单。通过多功能性和可扩展性的结合，jQuery改变了数百万人编写JavaScript的方式。	
+		
+		1.xx版本 兼容低版本浏览器  -> 1.72
+		
+		3.xx版本 不兼容低版本浏览器新增加了h5的新特性
+		
+		学习版
+			注释、代码都没被压缩
+		压缩版min.js
+			没注释、代码被压缩
+			
+			
+		选择器:
+			如果获取的元素是一组的话，不写下标，那么默认获取的是第一个；其他的要加下标；
+			JQ的选择器和css中是一样的
+			
+			潜规则：变量名前加$
+			如：id 获取	：var $box = $('#box');
+				class类名 获取	：var $div = $('.box');
+				
+			属性选择器:
+				1、 [attribute="value"];如：var $div = $('div[class="box"]');//通过指定的属性和值获取元素；
+				2、 [attribute*="value"];attribute里带有"value"字符的元素都会被选中；
+				3、 [attribute^="value"];找到attribute里开头有"value"字符的元素；
+				4、 [attribute$="value"];找到attribute里结尾有"value"字符的元素；
+				5、 [attribute!="value"];找到attribute不是"value"的元素；
+				
+			伪类选择器:
+					:eq(下标)；选择第几个元素；
+						$('div:eq(1)');选择第二个div;
+					:add 奇数
+						$('div:odd');获取下标为奇数的元素（以下标计数的）；
+					:even 偶数
+						$('div:even');获取下标为偶数的元素（以下标计数的）；
+					:lt(下标)
+						$('div:lt(3)');获取下标小于3的元素；
+					:gt(下标)
+						$('div:gt(3)');获取下标大于3的元素；
+					:first
+						$('div:first');获取第一个元素；
+					:last
+						$('div:last');获取最后一个元素；
+					
+			表单选择器:
+					$('input:checked');表单中获取被选中的元素：
+			
+			层级选择器:
+				$(prev + next) 获取prev的紧挨着的下一个next元素；
+				如：<p></p>
+					<a></a>
+					$('p + a')；p元素和a元素必须在一块;--><a></a>
+			
+			属性操作:
+				attr -> getAttribute -> setAttribute 
+				removeAttr -> removeAttribute()
+				
+				attr()括号里写一个是获取，写2个是设置属性；
+					$('#div').attr('index',1);//设置div的行间index属性为1；
+					$('#div').attr('index');//获取div的行间index属性；
+				prop:
+					获取在匹配的元素集中的第一个元素的属性值。
+					返回值为布尔值：
+					成立：true  否则：false
+						
+				prop()同attr(),但有区别，是专门为复选框设计的，在判断是否被选中时，返回值是布尔值；而attr()在处理复选框返回值是checked和undefined;
+				
+				$('#div').removeAttr('index');删除index属性;
+			
+			html -> innerHTML 
+				不但能读文本还能解析标签对
+			text -> innerText  
+				只读文本，不能解析标签对
+			
+			val():
+				操作value属性
+				读：
+					$obj.val()
+				写：
+					$obj.val('设置的内容')
+			
+			removeClass:
+				删除指定class名
+			addClass
+				添加指定的class名
+			
+			toggleClass：
+				有的删没的加
+				
+				$('input:button').click(function(){
+						// $('div').addClass('show');//给div添加类名show；
+						// $('div').removeClass('show');//div删除类名show；
+						$('div').toggleClass('show');
+					})
+					
+			css();一个参数是获取属性且有单位；2个参数是设置属性且是行间样式；
+					$('div').css('width',200)；或 $('div').css('width','200px');//设置宽为200px;
+					//批量设置属性，以键值对的形式（对象）
+					$('div').css({
+						width:200,
+						border:'1px solid #000'
+					})
+				
+				
+			
+			index()：
+					获取索引值
+					括号不写参数，找到当前元素在父级中的索引是多少（在父级中是第几个元素节点）；
+					写参数(获取元素的条件)，找到box下当前标签为li的元素在父级中的索引是多少（在父级中是第几个元素节点）；$(this).index('.box li')
+					如：$('li').click(function(){
+						alert($(this).index());//找到li在父级ul中的索引；
+						return false;//阻止冒泡
+						//ev.originalEvent.cancelBulle = true;//阻止冒泡
+					})		
+					
+					
+		*/			
+		
+	</script>
+</body>
+</html>
