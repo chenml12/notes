@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	<script type="text/javascript">
+		/*
+			XML:是种数据格式
+				json：是种数据格式；
+				
+				AJAX:((异步)Asynchronous javascript and XML)动态请求数据，获取数据后如何根据需求去操作数据。
+						向后端取数据的一种技术
+						对于ajax请求过来的数据都是字符串，一般来说是json格式的；
+						减少服务器压力，更新数据无刷新（只刷新局部数据，不会整个页面刷新），前后端分离的一种数据交互技术（异步与服务器通信）。
+						后端文件必须运行在服务器上才能正常使用，所以要有个服务器；
+				
+				
+			ajax的数据交互：
+				
+				get:
+					通过url地址栏进行数据请求，用户的私人信息都可以在提交后被盗用。
+					因为使用url的方式去请求，所以对于每个浏览器地址栏的体积大小不一样且是有限的。
+					一般来说，get的方式不适用提交用户私人信息。
+					IE浏览器地址栏不支持中文，得转换编码：
+							encodeURI('逃') 把中文转为url码
+							decodeURI('')  把URL码转为中文
+							
+							1、var ajax = new XMLHttpRequest();
+							2、ajax.open('get','php/get.php?user='+user.value,true);//三个参数'user'是php里规定好的,默认为true，可以不写；
+							3、ajax.send();
+							4、ajax.onload = function(){
+									span.innerHTML = ajax.responseText;//请求后返回的结果
+								};
+							
+							
+				post:
+						提交可以是无限大（后端会给传输设卡）;
+						post是通过服务器发送请求，所以相对安全;
+						在send发送前设置请求头信息;
+						适用于私人信息发送、大文件传输；
+							1、var ajax = new XMLHttpRequest();//括号可以不写
+							2、ajax.open('post','php/post.php');
+							3、ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')//urlencoded已经把中文转码了
+							4、ajax.send('user='+txt.value);//发送的字段放在send里
+							5、ajax.onload = function(){
+									span.innerHTML = ajax.responseText;
+								}
+						
+						如果后台数据是xml的那么 ajax.responseText要换成 ajax.responseXML转为DOM（标签的形式） 再 利用DOM形式去获取数据;
+				
+				JSON.stringify() 把js对象转为JSON格式的字符串；
+				JSON.parse()  把JSON格式的字符串转为js的对象；
+				
+				
+				eval();
+						能把字符串尽可能的转为js代码并运行;
+						有时需要用'()'小括号包下；
+						但安全会有问题
+						
+						var str = 'alert(123)';
+						eval(str); -> 会运行alert代码
+						
+						var str = "{'name':'小明'}";
+						eval(str)  ->  报错
+						
+						var str = "({'name':'小明'})";
+						eval(str)  ->  {name:'小明'}；
+						
+						var str = "({'name':'小明'})";
+						new Function('','return'+str)(); -> {name:"小明"};//等同于eval()
+						所以：
+							JSON.parse() -> eval() -> new Function('','retuen ')();
+				
+				IE不支持innerHTML:
+					IE9及以下 : 支持text
+					IE10及以上是支持textContent
+					
+				IE8及以下不支持onload事件：
+							换成 onreadystatechange事件
+							用ajax.readyState == 4 去监控请求状态是否完成，然后执行代码；
+				
+				
+				同步与异步：
+				
+				自己封装ajax
+				*/
+			function ajax(json){
+		//默认配置
+		var settings = {
+			url:'',
+			method:'get',
+			success:function(){},
+			error:function(){},
+			data:{},
+			dataType:'json'//返回的数据格式，默认为json
+		}
+		//有配置走配置，没配置走默认
+		for(var attr in json){
+			settings[attr] = json[attr];
+		}
+		
+		//将一个对象转成字符串  user=momo&sex=男&id=2
+		var arr = [];
+		for(var i in settings.data){
+			arr.push(i+'='+settings.data[i]);
+		}
+		
+		settings.data = arr.join('&');
+		
+		var ajax = new XMLHttpRequest();
+		
+		//如果请求方式是get，在open下的第二个参数就要拼接字段
+		//else就是post。要设置请求头信息并且把字段拼接到send中
+		if(settings.method.toLowerCase() === 'get'){
+			ajax.open(settings.method,settings.url+'?'+settings.data,true);
+			ajax.send();
+		}else{
+			ajax.open(settings.method,settings.url,true);
+			ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			ajax.send(settings.data);
+		}
+
+		ajax.onload = function(){
+			//当请求成功的时候执行settings.success，失败的时候执行settings.error
+			if(ajax.status >= 200 && ajax.status <= 207){
+				
+				//如果传入json，那么就返回对象格式的数据
+				if(settings.dataType === 'json'){
+					settings.success(eval('('+ajax.responseText+')'));
+				}else if(settings.dataType === 'xml'){
+					//如果传入的是xml，那么返回xml格式的数据
+					settings.success(ajax.responseXML);
+				}else{
+					//如果传入的既不是json也不是xml，那么返回json格式（字符串）的数据
+					settings.success(ajax.responseText);
+				}
+			}else{
+				settings.error(ajax.status);
+			}
+		}
+	}	
+	</script>
+				
+	</body>
+</html>
