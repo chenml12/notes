@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background:red;
+				margin-bottom:5px;
+			}
+		</style>
+	</head>
+<body>
+	<!--
+		"use strict"
+				使用严格模式；
+				普通函数fn(){}在全局调用时，不使用严格模式：this指向window;使用严格模式：this指向undefined;
+				箭头函数 不使用严格模式：this指向(老爹)window;使用严格模式：this指向(老爹)window;
+				
+				noGlobal
+					是undefined;低版本浏览器会修改undefined；所以有noGlobal来保证undefined不被修改；
+					
+			
+		jQuery的链式操作
+			在css函数最后return this;
+	-->
+	<div id="box">1</div>
+	<div class="con">2</div>
+	<div class="con">3</div>
+	<div class="con">4</div>
+	<script src="sizzle.js" type="text/javascript"></script>
+	<script>
+		//引用sizzle.js选择器文件写自己的JQ小例子
+		
+		//形成闭包,将jQuery私有化
+		(function(global,factory){
+			factory(global);
+	})(typeof window !== 'undefined' ? window : this,function(global,noGlobal){
+		const jQuery = function(selector){
+			return new jQuery.fn(selector);//new jQuery.fn（任意另一个构造函数）不去new jQuery是为了避免死循环；
+		};
+		jQuery.prototype = {
+			constructor:jQuery,//修改constructor指向为jQuery；
+			fn:function(selector){
+				var ele = Sizzle(selector);//获取元素
+				for(var i=0;i<ele.length;i++){
+					//this指向fn{}对象且是空的，所以要把获取到的元素添加到里面；
+					this[i] = ele[i];
+				}
+				//为了能循环fn{}里的每一个元素添加length属性
+				this.length = ele.length;
+			},
+			css:function(){
+				if(arguments.length == 1){
+					//一个参数时
+					if(typeof arguments[0] === 'object'){
+						//一个参数为键值对的形式设置属性
+						for(var i=0;i<this.length;i++){
+							for(var attr in arguments[0]){
+								this[i].style[attr] = arguments[0][attr];
+							}
+						}
+					}else{//一个参数为简单形式时
+						//获取一组元素没写下标时，默认是获取第一个元素属性
+						return getComputedStyle(this[0])[arguments[0]];
+					}
+				}else if(arguments.length == 2){
+					//2个参数设置属性
+					for(var i=0;i<this.length;i++){
+						this[i].style[arguments[0]] = arguments[1];
+					}
+				}
+				//为了链式操作，返回出对象
+				return this;
+			}
+		}
+		//使new jQuery.fn对象有jQuery的属性方法
+		jQuery.fn = jQuery.prototype.fn;
+		jQuery.fn.prototype = jQuery.prototype;
+		//使jQuery在外部也能拿的到
+		global.$ = jQuery;
+	})
+		//var $div = $('div:eq(1)');//获取第二个div;
+		//var $div = $('#box');//获取id=box的div；
+		var $div = $('div');
+		/*$div.css({
+			width:'200px',
+			height:'300px',
+			background:'yellow'
+		})*/
+		$div.css('background','blue').css('border','2px solid red');
+		console.log($div.css('width'));
+		//console.log($div)
+		
+	</script>
+</body>
+</html>
