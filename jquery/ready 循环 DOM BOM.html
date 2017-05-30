@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+		window.onload
+			当页面中所用的静态资源加载完成之后再执行函数中的代码
+			
+		DOMContentLoaded（高版本才支持）
+			当dom加载完成之后再执行函数中的代码
+		
+		onreadystatechange -> 
+			在低版本IE下，do.documentElement.doScroll('left');
+		
+		jQuery下的方法(高低版本都支持)：当DOM加载完就执行
+		$(function(){
+			//代码				-> 就是ready事件
+		})
+			
+			*/
+	/*
+		当段程序出错了就走catch,避免报错之后，下面的代码不执行。
+		
+		e:报错的原因
+		
+		*** 性能极低
+		
+		try{
+			
+		}catch(e){
+			
+		}
+	
+	
+	
+	try{
+		console.log(arr);
+	}catch(e){
+		alert('arr有问题');
+		console.log(e);
+	}	
+*/
+
+//	document.addEventListener('DOMContentLoaded',function(){
+//		alert(1);
+//	})
+
+//	$(document).ready(function(){
+//		alert(1);
+//	});
+//就是ready事件
+//	$(function(){
+//		alert(22);
+//	});
+
+
+/*循环
+each() -> 循环JQ对象（相当于for循环）
+	$(obj).each(function(索引,每个元素){});
+	第一个参数：每个元素的下标索引；
+	第二个参数：每个元素，为原生对象，所以用$()包一下转为JQ对象；
+	$('li').each(function(i,ele){
+		$(ele).click(function(){
+			$(ele).css('background','red');
+		})
+	})
+	*/
+					
+/*
+		原生转JQ
+			$(原生对象)
+			
+		get把JQ对象转成原生对象
+			$(obj).get(num)
+			
+			个人强烈建议使用$(obj)[num]
+	*/
+/*DOM:
+1、节点选择
+	元素父节点：元素.parent();
+		
+	元素父节点：元素.closest('查找条件');找离自身最近符合条件的父级(如果自己符合条件，优先自己)，比如查找条件：按类名查找->元素.closest('.color'):查找类名为color的此元素的父元素；
+
+	上个兄弟节点：元素.prev();如果没有上个兄弟，那么查找到的元素length=0,不会报错;
+	
+	下个兄弟节点：元素.next();同上;
+	
+	所有的兄弟节点：元素.siblings();
+					括号里可以写 查找条件，如：元素.siblings('.color');
+	
+	第一个节点：元素(一组).first()；获取一组元素中的第一个;
+	
+	最后一个节点：元素(一组).last();获取一组元素中的最后一个;
+	
+	after() :
+			目标元素(当前元素).after(指定元素);把指定元素放在目标元素的后面；
+	
+	insertAfter() :
+			目标元素(当前元素).insertAfter(指定元素);把目标元素插入到指定元素的后面；
+	
+	before()与insertBefore() : 与after相反；
+	
+	append() :
+			往某个元素内部的最后添加一个（html标记）子元素；
+			元素.append($('<li>'+num+'</li>'))
+			
+	appendTo() :
+			$('<li>'+num+'</li>').appendTo(元素);
+				
+		remove() :
+				删除指定节点；元素.remove();
+				
+		replace() :替换
+				
+		clone() :
+				克隆节点；元素.clone();克隆元素及元素下所有节点，不会克隆事件；
+							元素.clone(true);可以克隆事件；
+							
+							
+							
+
+BOM:
+	获取高度：元素.height(),是不带单位的;设置高度：元素.height(200);都是不带边框的；
+	元素.outerHeight();带边框的+padding;
+	元素.outerHeight(true);带边框的+padding+margin;
+	元素.innerHeight();带padding不带边框
+	
+	offset().left;到可视区左端的距离，不会随滚动条改变
+	offset().top;到可视区顶端的距离，不会随滚动条改变
+	
+	position().left;元素左端外边框到定位父级及左端内边框
+	position().top;元素上端外边框到定位父级及上端内边框
+	
+	scrollTop();滚动的距离
+	*/
+
+	</script>
+</body>
+</html>
