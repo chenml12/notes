@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			cookie:
+					自定义属性；获取出来的都是字符串
+					
+					设置cookie：
+							document.cookie = 'value';
+							document.cookie = 'key=value';
+							document.cookie = 'key=value;expires=要设置的过期时间';
+							
+					获取cookie:
+							document.cookie;
+							注意：在获取cookie时一个cookie与另一个cookie之间是以'; '（分号 空格）分隔的；
+							
+					删除cookie：
+							设置时间为过去的时间
+							document.cookie = 'key=value;expires=-1';
+							
+					必须放在服务器环境下才可以
+					设置后存在于浏览器的缓存中，可以在浏览器的调试工具中捕捉到
+					
+					生命周期：
+							默认生命周期是本次浏览器关闭之前
+							 不同的浏览器不共享cookie
+							 
+						设置生命周期：
+								如：document.cookie = 'name=momo;expires=要设置的过期时间';
+					
+					
+		-->
+		
+	</body>
+</html>

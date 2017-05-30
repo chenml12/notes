@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			jQuery的事件：
+				1、jQuery中的所有事件都是事件绑定，即addEventListener；
+					如果几个元素都在同一事件上做同样的事，元素之间逗号；（或不同事件做同样的事，那么事件之间空格）；
+					如：	$('#div1,#div2').on('mouseover click',function(){
+								alert(2);
+							})
+				
+				
+				2、在事件中的第二个参数可以为数据，通过ev.data可以获取到绑定数据{} -> ev.data;
+					var arr = [{name:'小名'}]
+					$('#div1,#div2').on('mouseover click',{da:arr[0]},function(ev){
+						alert(ev.data.da.name);
+					})
+					
+				3、结构中是父子结构，事件中也是事件嵌套时，当每点击一次父元素时，都会给子元素绑定一次事件，
+					jq中的ev是二次封装的，不是原生的
+					解决：
+						先解绑，再绑定：$('#div').click(function(){
+												//off()用于解绑
+												$('#div2').off().click(function(ev){
+													//事件嵌套会有冒泡：
+													//阻止冒泡:
+													//ev.stopPropagation();
+													//return false;
+												}
+											})
+									
+				4、阻止默认行为：
+							ev.preventDefault();
+							return false;//既能阻止默认行为，也能阻止冒泡；
+							
+				5、事件上可以加自定义事件
+						$('#div').on('click.a1',function(){
+							alert(1);
+						})
+						div2也想用div的事件：那么给指定事件加类名；
+						trigger(事件名或事件名+类名)
+							$('#div2').click(function(){
+								$('#div').trigger('click.a1');//不加类名.a1会调用div所有的click事件；
+							})
+							
+				5、事件委托
+						
+						
+				6、元素.children();获取元素子元素（只找一级）
+					元素.find();代码缓存；获取元素的子元素，符合条件的子元素都能获取（括号里写条件）
+					
+				7、hover();
+						相当于onmouseenter;onmouseleave;
+						hover(function(){},function(){});
+						第一个参数：移入时的函数；
+						第二个参数：移出时的函数；
+				
+				8、动画：
+						元素.hide();括号里可以写'毫秒数'；消失
+						元素.show();括号里可以写'毫秒数'；显示
+						
+						元素.toggle();括号里可以写'毫秒数'；自带判断
+						
+						slideDown();运动改变高度，从上往下运动(高度增加)；括号里传数字、或slow/fast等表示时间（毫秒）；
+						slideUp();运动改变高度；从下往上运动(高度减少)；
+						slideToggle();同上；有判断的；
+						
+						fadeIn();淡入；参数表时间（毫秒）
+						fadeOut();淡出
+						fadeToggle();淡入淡出；有判断的；
+						
+						animate();动画
+							元素.animate({},1000,'linear',function(){});
+							第一个参数：对象，运动的目标点；如：{left:0,opacity:0}
+							第二个参数：运动时间；（可有可无，不写 默认为700）;
+							第三个参数：运动形式，只有2个：linear/swing；（可有可无，不写默认为swing）;
+							第四个参数：回调函数；
+							
+				9、队列的问题：
+						JQ的动画是走队列的在先入队列的运动没有结束时（未出队列），那么下次运动就不会开始；
+						有动画效果，点击多了后，会有问题，（队列的问题）；
+						解决：
+							在继续点击的时候，让未完成的任务出队列
+							使用stop()终止元素上正在运动的动画:
+									元素.stop([参数1]，[参数2]).toggle();
+									参数：
+										(可有可无)
+										参数1：设置true,立即停止本次动画，并进行下次动画；
+										参数2：设置true,立即完成本次动画，并进行下次动画；
+						
+				10、工具方法：
+						1、使原生的对象可以使用jq的方法
+							$.each(arr,function(i,ele){
+								
+							})
+						
+						2、var obj = {name:'小妹'}
+							var obj2 = $.extend(true,{},obj);
+							第一个参数不写，是浅拷贝；写true，那么是深拷贝；
+							var obj3 = {name:'小名',job:'学生'}
+							var obj2 = $.extend(true,{},obj,obj3);obj与obj3中有重复的属性，那么obj3的会覆盖obj的属性；
+							
+						3、$.isFunction(对象);判断对象是不是函数类型，返回布尔值；
+						
+		-->
+	</body>
+</html>

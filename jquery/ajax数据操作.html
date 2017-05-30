@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+				
+				XML:是种数据格式
+				json：是种数据格式；
+				
+				AJAX:((异步)Asynchronous javascript and XML)动态请求数据，获取数据后如何根据需求去操作数据。
+						向后端取数据的一种技术
+						对于ajax请求过来的数据都是字符串，一般来说是json格式的；
+						减少服务器压力，更新数据无刷新（只刷新局部数据，不会整个页面刷新），前后端分离的一种数据交互技术（异步与服务器通信）。
+						后端文件必须运行在服务器上才能正常使用，所以要有个服务器；
+				
+				
+			ajax的数据交互：
+				
+				get:
+					通过url地址栏进行数据请求，用户的私人信息都可以在提交后被盗用。
+					因为使用url的方式去请求，所以对于每个浏览器地址栏的体积大小不一样且是有限的。
+					一般来说，get的方式不适用提交用户私人信息。
+					IE浏览器地址栏不支持中文，得转换编码：
+							encodeURI('逃') 把中文转为url码
+							decodeURI('')  把URL码转为中文
+							
+							1、var ajax = new XMLHttpRequest();
+							2、ajax.open('get','php/get.php?user='+user.value,true);//三个参数'user'是php里规定好的,默认为true，可以不写；
+							3、ajax.send();
+							4、ajax.onload = function(){
+									span.innerHTML = ajax.responseText;//请求后返回的结果
+								};
+							
+							
+				post:
+						提交可以是无限大（后端会给传输设卡）;
+						post是通过服务器发送请求，所以相对安全;
+						在send发送前设置请求头信息;
+						适用于私人信息发送、大文件传输；
+							1、var ajax = new XMLHttpRequest();//括号可以不写
+							2、ajax.open('post','php/post.php');
+							3、ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')//urlencoded已经把中文转码了
+							4、ajax.send('user='+txt.value);//发送的字段放在send里
+							5、ajax.onload = function(){
+									span.innerHTML = ajax.responseText;
+								}
+						
+						如果后台数据是xml的那么 ajax.responseText要换成 ajax.responseXML转为DOM（标签的形式） 再 利用DOM形式去获取数据;
+				
+				JSON.stringify() 把js对象转为JSON格式的字符串；
+				JSON.parse()  把JSON格式的字符串转为js的对象；
+				
+				
+				eval();
+						能把字符串尽可能的转为js代码并运行;
+						有时需要用'()'小括号包下；
+						但安全会有问题
+						
+						var str = 'alert(123)';
+						eval(str); -> 会运行alert代码
+						
+						var str = "{'name':'小明'}";
+						eval(str)  ->  报错
+						
+						var str = "({'name':'小明'})";
+						eval(str)  ->  {name:'小明'}；
+						
+						var str = "({'name':'小明'})";
+						new Function('','return'+str)(); -> {name:"小明"};//等同于eval()
+						所以：
+							JSON.parse() -> eval() -> new Function('','retuen ')();
+				
+				IE不支持innerHTML:
+					IE9及以下 : 支持text
+					IE10及以上是支持textContent
+					
+				IE8及以下不支持onload事件：
+							换成 onreadystatechange事件
+							用ajax.readyState == 4 去监控请求状态是否完成，然后执行代码；
+				
+				
+				同步与异步：
+				
+				自己封装ajax
+				
+	*************************************************************************************************			
+				上传数据：
+						FormData:把传入的数据转为二进制数据；
+						file控件下有个属性叫files
+						它只有append(key,value)方法把数据上传
+								form.append('file',shuju.files[0]);
+						
+						
+					<input type="file" id="shuju"/>
+					<input type="button" id="btn"/>	
+						
+					btn.onclick = function(){
+						var ajax = new XMLHttprequest;
+						ajax.open('post','post_file.php');
+						//ajax.setRequestHeader('Content-Type','multipart/form-data');
+						//ajax.send('file='+shuju.value);//shuju.value传上去之后是个字符串，所以后端不认，无法上传；得把数据上传到服务器。
+						//ajax.send('file='+shuju.files[0]);//也不成功
+						var form = new FormData();
+						form.append('file',shuju.files[0]);
+						//form.append('user',user.value);//有多个就继续传
+						
+						
+						//上传进度,在发送之前监控
+						ajax.upload.onprogress = function(ev){
+							//ev.loaded 文件上传大小
+							//ev.toyal 文件总大小
+							//加进度条
+							div2.style.width = (ev.loaded/ev.total)*总宽 + 'px';
+						}
+						ajax.send(form);
+						
+						
+						ajax.onload = function(){
+							
+						}
+					}
+				
+						
+					
+				
+		-->
+		<!--<form action="" method="post">-->
+			姓名<input id="txt" type="text" value=""/><span id="span"></span>
+			密码<input type="password" value=""/>
+			<input id="btn" type="submit" value="提交"/>
+		<!--</form>-->
+		
+		<script>
+			var btn =document.getElementById('btn');
+			var span =document.getElementById('span');
+			var txt =document.getElementById('txt');
+			//get方法
+			/*btn.onclick = function(){
+				var ajax = new XMLHttpRequest();//括号可以不写
+				ajax.open('get','php/get.php?pname='+txt.value,true);
+				ajax.send();
+				ajax.onload = function(){
+					span.innerHTML = ajax.responseText;
+				}
+			}*/
+			
+			//post方法
+			btn.onclick = function(){
+				var ajax = new XMLHttpRequest();//括号可以不写
+				ajax.open('get','php/post.php');
+				ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')//urlencoded已经把中文转码了
+				ajax.send('pname='+txt.value);
+				ajax.onload = function(){
+					span.innerHTML = ajax.responseText;
+				}
+			}
+			
+			//JQ版ajax
+			var $login_user = $('#login_user');
+			var $login_pass = $('#login_pass');
+			var $login_btn = $('#login_btn');
+			$login_btn.click(function(){
+				$.ajax({
+					url:'user.php',
+					//dataType:'json',
+					data:{
+						act:'login',
+						user:$login_user.val(),
+						pass:$login_pass.val()
+					},
+					success:function(data){
+						var data = eval('('+data+')');
+						alert(data.desc);
+						if(!data.error){
+							window.location.href = 'ajax_error.php';
+							//window.open('ajax_error.php');
+						}
+						
+					}
+				})
+				
+			})	
+			
+		</script>
+	</body>
+</html>

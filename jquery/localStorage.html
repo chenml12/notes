@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			localStorage:
+						
+						
+						高版本浏览器可以在本地存储，低版本浏览器只能在服务器上使用；
+						
+						存储空间比较大，目前有5M;
+					
+					设置：	
+						localStorage.setItem('key','value');
+					获取：
+						localStorage.getItem('key');
+					清除单个：
+						localStorage.removeItem('key');
+					清除所有：
+						localStorage.clear();
+						
+					生命周期：
+						只要不删除，永远存在
+						
+						
+						
+				storage事件：
+					
+					window.addEventListener('storage'function(){
+						alert(1);
+					},false)
+					1、当前页面绑定这个事件后，如果在浏览器上删除本地storage时，就会在当前页面触发事件；
+					2、storage这个事件更擅长通过操作本地数据来通知当前浏览器的其他兄弟页面；(2个页面数据同步)
+							前提条件是兄弟页面在同一个域中才能操作；
+							
+					
+		******************************************************************************************
+		
+		sessionStorage
+					
+					操作本地数据的方法和localStorage相似；
+					存储空间比较大，目前有5M;
+					
+					区别：生命周期：浏览器关闭后就没了；
+							不支持storage事件
+							相当于大存储的cookie
+						
+					
+					设置：	
+						sessionStorage.setItem('key','value');
+					获取：
+						sessionStorage.getItem('key');
+					清除单个：
+						sessionStorage.removeItem('key');
+					清除所有：
+						sessionStorage.clear();
+						
+					生命周期：
+						浏览器关闭后就没了
+		-->
+	</body>
+</html>
