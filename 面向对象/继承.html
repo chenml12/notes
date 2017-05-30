@@ -36,6 +36,39 @@
 							var ph = new fn();
 							drag2.ptototype = ph;
 							那么修改drag2下的属性及方法时，就不会影响到drag
+							
+							
+			   
+			    
 		-->
+		<script type="text/javascript">
+//			es6写面向对象和继承
+			class Person{
+				construtor(name,age){
+					this.name=name;
+					this.age=age;
+				}
+				say(){
+					alert(this.name);
+				}
+			}
+			class Pice extends Person{
+				constructor(name,age,job){
+					//如果要使用父类的属性那么一定要带super，不带就报错
+					super(name,age);
+					this.job = job;
+				}
+				
+				say(){
+					alert(this.job);
+				}
+			}
+	
+			var p1 = new Person('小小',20,'小警察');
+			var p2 = new Pice('大大',10,'大警察');
+			
+			p1.say();
+			p2.say();
+		</script>
 	</body>
 </html>
