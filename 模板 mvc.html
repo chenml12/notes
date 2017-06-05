@@ -3,8 +3,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<style type="text/css">
+			.red{
+				color: red;
+			}
+		</style>
+		<script type="text/javascript" src="template-native.js"></script>
 	</head>
 	<body>
+		<div id="content"></div>
 		<!--1.
 			模板引擎   --  template
 			js -> JQ -> template(相对JQ提升了性能问题)
@@ -27,6 +34,24 @@
 				  
 				 
 				-->
-		
+		<script id="temp" type="text/html">
+			<h1><%=title%></h1>
+			<ul>
+				<%for(var i=0;i<list.length;i++){%>
+					<%if(i==2){%>
+						<li class="red"><%=list[i]%></li>
+					<%}%>
+					<li><%=list[i]%></li>
+				<%}%>
+			</ul>
+		</script>
+		<script type="text/javascript">
+			var data = {
+			    title: '标签',
+			    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+			};
+			var html = template('temp', data);
+			document.getElementById('content').innerHTML = html;
+		</script>
 	</body>
 </html>
