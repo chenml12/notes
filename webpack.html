@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>webpack</title>
+</head>
+<body>
+	<!--
+		概念:
+	    webpack 是一个现代的 JavaScript 应用程序的模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图表(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成少量的 bundle - 通常只有一个，由浏览器加载。
+	    
+	    它是高度可配置的，但是，在开始前你需要先理解四个核心概念：入口(entry)、输出(output)、loader、插件
+		  npm install --global webpack(jquery) //全局安装webpack
+		    简写：
+		    npm i -g webpack
+		    
+		   npm i webpack //本项目内（文件夹）安装webpack
+		   
+		***浏览器不支持es6时
+		1、项目初始化:
+			    npm init  //创建一个 package.json 文件，用于保存项目版本、依赖关系等
+			    
+			2、在项目中安装本地webpack
+			    npm install webpack --save(全写)
+			    	或
+			    npm i webpack -S(简写)
+			    
+			3、因为ES6要转成浏览器可识别的：
+			      必须要在webpack中安装2个loader
+			        babel-loader
+			        babel-core
+			   // npm i babel-loader babel-core -S
+			        
+			4、配置webpack
+			      手动在你的项目目录中创建一个
+			      webpack.config.js
+			      
+			5、配置webpack.config.js文件
+			   
+			 
+			6、package文件中添加：
+				    scripts:{
+				      "nizp":"webpack"
+				    }
+				    
+			7、cmd 中运行 webpack
+					npm run nizp
+		
+			    
+		
+		
+		
+	-->
+</body>
+</html>
