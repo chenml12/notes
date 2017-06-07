@@ -36,20 +36,72 @@
 			      webpack.config.js
 			      
 			5、配置webpack.config.js文件
-			   
-			 
 			6、package文件中添加：
 				    scripts:{
-				      "nizp":"webpack"
+				      "nizp":"webpack -w"
 				    }
-				    
+				此时可以监听入口文件的改变，实时刷新页面，非入口文件的改变则不会被监听到，不在需要手动进行刷新。并且目标文件不包括index.html。
 			7、cmd 中运行 webpack
 					npm run nizp
-		
-			    
-		
-		
-		
+			
+			8.页面自动在html文件中引入js文件
+				npm i html-webpack-plugin -S
+				const HtmlWebpackPlugin=require('html-webpack-plugin');
+				module.exports = {
+					plugins: [
+				        new HtmlWebpackPlugin({
+				        		filename:'../111.html',
+				            template: './index.html' // 模版文件
+				        })
+				    ]
+				}
+			9.安装css插件自动引css
+			npm i style-loader css-loader -S
+			在app.js中添加require('./style/style.css');
+			  module:{
+			    rules:[
+			      {
+			        test:/\.js$/,
+			        use:{
+			          loader:'babel-loader'
+			        }
+			      },
+			      {
+			        test:/\.css$/,
+			        user:['style-loader,'css-loader']
+			      }
+			    ]
+			  },
+			  10.把style改成link形式
+			  npm i extract-text-webpack-plugin -S
+			  
+			  const link=require('extract-text-webpack-plugin');
+			  
+			  module:{
+			    rules:[
+			      {
+			        test:/\.js$/,
+			        use:{
+			          loader:'babel-loader'
+			        }
+			      },
+			      {
+			        test:/\.css$/,
+			        //user:['style-loader,'css-loader']
+			        use:link.extract({
+			        	fallback:"style-loader",
+			        	use:"css-loader"
+			        })
+			      }
+			    ]
+			  },
+			  plugins: [
+			        new HtmlWebpackPlugin({
+			        		filename:'../111.html',
+			            template: './index.html' // 模版文件
+			        }),
+			        new link('style.css')
+			    ]
 	-->
 </body>
 </html>
