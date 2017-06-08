@@ -43,8 +43,98 @@
 				可以有修饰符：
 					.number	输入的字符转为数字类型; 与parseFloat相似，但转不了的话，就是输入的字符串；
 					.trim 去除首尾空格; 
-					修饰符可以连写：v-model.trim.number=""
-		3.class
+					修饰符可以连写：v-model.trim.number="XXX"
+					
+		3.Class 与 Style 绑定
+		
+			v-bind:class="[{}]"
+		    v-bind:style="[{}]"
+		    
+			    如果使用数组，那么class值要为数据中的值{
+			      class="red"
+			      v-bind:class="[redA]"
+			      data : {
+			        redA:'red'
+			      }
+			    }
+		    
+		    如果使用对象，那么class值是{red(className):boolean}
+		    如果boolean为true:添加这个className，false,不添加这个className
+		    
+		    v-bind:style="{background:red}"
+		    v-bind:style="redA"
+		    data{
+		      redA:{background:red}
+		    }
+		    
+		    v-bind:style="[{}]"
+		    注意：
+		      如果使用数组的方式添加样式，那么数组中必须要为对象，
+		      直接写样式是不认的
+		 
+		4.事件绑定：
+			v-on:click="事件绑定函数"；v-on:click="fn"
+			缩写：@clic="事件绑定函数"
+			事件函数一般写在methods:{}中，里面的this指向实例化对象即v
+				methods:{
+					fn(参数1，$event){
+						//this指向v
+						//可以传参
+						//$event就是ev
+					}
+				}
+			
+			@keyup.13=""或@keyup.enter="";回车事件；（写相应的键值）；
+			
+			阻止冒泡：
+				@click.stop="事件函数";
+			阻止默认行为：
+				@click.prevent="事件函数";
+			只触发一次事件
+				@click.once = "事件函数";
+				可以连写：@click.stop.once = "事件函数";
+			
+			
+			修饰符：
+				stop:阻止冒泡
+			    prevent：阻止默认行为
+			    self:只在触发事件元素身上才会调用
+			    once：事件只触发一次
+			    left - (2.2.0) 只当点击鼠标左键时触发。
+			    right - (2.2.0) 只当点击鼠标右键时触发。
+			    middle - (2.2.0) 只当点击鼠标中键时触发。
+			    
+			    
+			计算属性：
+				computed:{}
+				当某个数据发生变化时需要处理的行为，就可以使用computed，computed里的属性是依赖于某个数据的，当数据发生变化才会更改这个属性的值；
+				与methods的区别：
+					methods只要函数调用就会执行
+					computed某个数据发送变化才执行
+				computed:{
+					fn:function(){
+						return 'asd'
+					}
+				}
+				或
+				拆分为get 和 set
+				computed:{
+					fn:{
+						get:function(){
+							//依赖数据发送变化时触发get
+							//写更改的逻辑
+							return 'asd'
+						},
+						set:function(newVal){
+							//当这个计算属性(fn)发送变化时才会触发
+							//设置
+							//newVal就是 下面的'adf'
+						}
+					}
+				}
+				调用：v.fn = 'adf'
+		    
+		
 		
 	-->
 </body>
