@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--
+		 vue : view
+		    中国人:尤雨溪（男）
+ 		    更专注于数据，只专注数据的操作即可，不用关心DOM。
+		    
+		    MVC ->  vue -> V层-> 帮你渲染视图
+		    
+		    mvvm框架
+		    
+		    m  数据
+		    v  视图
+		    vm vue
+		    mvx
+		    mv*
+		1.v-for
+			不管是数组还是对象都是通过in来遍历（v-for）
+		      	如果是数组 val in data
+			                       这个val 数组中的每项:<li v-for="val in list">{{val}}</li>
+			                      如果要找下标
+			        val,index in data
+			     	   <li v-for="val,index in list">{{index}}:{{val}}</li>;
+			      
+		    	如果是对象:
+		     	 val,key in data
+		     	 <li v-for="val,key in list">{{key}}:{{val}}</li>;
+        2. v-model
+        	双向绑定(在表单控件或者组件上创建双向绑定)
+        	
+        	限制：
+        		<input>
+				<select>
+				<textarea>
+				components
+        	<input type="checkbox" v-model="val.check" />
+        	输入框时：
+				可以有修饰符：
+					.number	输入的字符转为数字类型; 与parseFloat相似，但转不了的话，就是输入的字符串；
+					.trim 去除首尾空格; 
+					修饰符可以连写：v-model.trim.number=""
+		3.class
+		
+	-->
+</body>
+</html>
