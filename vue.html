@@ -21,18 +21,17 @@
 		    mv*
 		1.v-for
 			不管是数组还是对象都是通过in来遍历（v-for）
-		      	如果是数组 val in data
-			                       这个val 数组中的每项:<li v-for="val in list">{{val}}</li>
-			                      如果要找下标
-			        val,index in data
-			     	   <li v-for="val,index in list">{{index}}:{{val}}</li>;
+		                      这个val 数组中的每项:<li v-for="val in list">{{val}}</li>
+		                      如果要找下标
+		        val,index in data
+		     	   <li v-for="val,index in list">{{index}}:{{val}}</li>;
 			      
 		    	如果是对象:
 		     	 val,key in data
 		     	 <li v-for="val,key in list">{{key}}:{{val}}</li>;
         2. v-model
         	双向绑定(在表单控件或者组件上创建双向绑定)
-        	
+        	所谓双向绑定,指的就是我们在js中的vue实例中的data与其渲染的dom元素上的内容保持一致，两者无论谁被改变，另一方也会相应的更新为相同的数据。这是通过设置属性访问器实现的
         	限制：
         		<input>
 				<select>
@@ -44,12 +43,15 @@
 					.number	输入的字符转为数字类型; 与parseFloat相似，但转不了的话，就是输入的字符串；
 					.trim 去除首尾空格; 
 					修饰符可以连写：v-model.trim.number="XXX"
+			当使用select框的时候，定义一个初始值选择的就是初始值这个
+		    option，当切换option的时候，状态随着内容所改变。
+		         数据本身也进行了改变		
+					
 					
 		3.Class 与 Style 绑定
 		
 			v-bind:class="[{}]"
 		    v-bind:style="[{}]"
-		    
 			    如果使用数组，那么class值要为数据中的值{
 			      class="red"
 			      v-bind:class="[redA]"
@@ -74,16 +76,18 @@
 		 
 		4.事件绑定：
 			v-on:click="事件绑定函数"；v-on:click="fn"
-			缩写：@clic="事件绑定函数"
+			缩写：@click="事件绑定函数"
 			事件函数一般写在methods:{}中，里面的this指向实例化对象即v
 				methods:{
 					fn(参数1，$event){
 						//this指向v
-						//可以传参
+						//可以传参    在不传参的时候，ev就为事件对象
 						//$event就是ev
 					}
 				}
-			
+			 如果事件绑定函数中第一个参数传入了别的值（不是event）
+     		 那么需要手动添加第二个参数为$event,它就是事件对象
+     		 
 			@keyup.13=""或@keyup.enter="";回车事件；（写相应的键值）；
 			
 			阻止冒泡：
@@ -108,9 +112,9 @@
 			计算属性：
 				computed:{}
 				当某个数据发生变化时需要处理的行为，就可以使用computed，computed里的属性是依赖于某个数据的，当数据发生变化才会更改这个属性的值；
-				与methods的区别：
-					methods只要函数调用就会执行
-					computed某个数据发送变化才执行
+				computed与methods区别:
+				      computed只有在某个数据发生变化的时候才会执行（第一次是会执行的）
+				      methods只要函数调用不管你数据发不发生变化都会执行
 				computed:{
 					fn:function(){
 						return 'asd'
@@ -133,7 +137,75 @@
 					}
 				}
 				调用：v.fn = 'adf'
-		    
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	-->
