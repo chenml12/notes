@@ -137,77 +137,179 @@
 					}
 				}
 				调用：v.fn = 'adf'
-		   
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		    条件渲染：
+				v-if=""
+				v-else-if="" //要紧跟在v-if的后面
+				v-else=""
+				
+				如果频繁操作dom的显示或隐藏，那么建议使用v-show="条件"
+				
+				本地存储通过watch的深度监听来监控数据的变化，当数据发生变化时，把新的数据放到本地
+				watch:{
+					list:{
+						
+					}
+				}
+				
+				
+				
+		组件:
+			父级通过props把数据传给子级（单向数据流），子级通过事件Emit Events可以修改父级数据；
+			如果这样去操作子数据的话，会报错，"可以把父级的数据转为子级自己的数据"：data(){return {num=this.number(父级数据)}},这样不会报错；但不会改变父级数据。
+			
+			可以用Emit方法：
+				vm.$emit('change',this.number)
+				参数：
+					参数1：任意写；相当于自己定义一个事件
+					参数2：可以传递若干个参数
+			
+			
+			<div id="app">
+				<my-zujian :num="number"></my-zujian>
+				<div>{{nnum}}</div>
+			</div>
+			
+			
+			Vue.component('my-zujian',{
+				props:['num'],
+				data(){
+					return {
+						nnum = '我是子数据';
+					}
+				}
+				template:'<div>{{num}}</div>'
+			})
+			
+			new Vue({
+				el:'#app',
+				data:{
+					number:'我父数据'
+				}
+			})
+			
+			
+			ref:
+				给组件或模版元素加上一个唯一的标识，可以通过$refs去直接获取
+				设置：ref="xx"  获取：vm.$refs.xx
+				同名的标记有多个，后面设置的会把前面的覆盖，只能获取最后一个
+				
+				
+			slot分发内容
+				slot在模版template中创建，可以设置为默认样式，有配置走配置，没配置走默认；不管哪种都要有<slot></slot>标签，不然没效果。
+				<div id="app">
+					<my-box>
+						<p>我哈</p> //配置的内容
+						<div>哈哈哈</div> //配置的内容
+					</my-box>
+				</div>
+				
+				template:'<div><slot><span>我是算咯</span></slot></div>';//slot是默认的内容
+				页面有多个slot时，要给slot加上name="1"等属性，并在定制时加slot="1";slot="2"等去对应;每个定制都要写一个slot;下面的方法可以只写一个slot：
+					或 插槽:
+					<template slot="1">
+						<p>1</p>
+						<p>2</p>
+					</template>
+									
+			
+			动态组件：
+				components
+				 组件提供了一个components的属性，这个属性可以设置多套模板，把模板的名字写进这个对象中即可；
+				这个时候需要提前定义一个状态，比如：currentView；当某个事件触发的时候去改变currentView，这个时候就会切换对应的视图。
+				在目录树中，组件的名字可以随便取，通过:is="设置状态"去监听状态的变化；从而达到切换view的目的
+				
+				小技巧：
+				      官方提供了一个keep-alive，这个标签可以将已切换过的视图缓存一遍，
+				      能够提高性能。所以遇到切换就包keep-alive
+				
+				<div id="app">
+				    <input type="button" value="第一个" @click="tab(1)" :class={active:val==1}>
+				    <input type="button" value="第二个" @click="tab(2)" :class={active:val==2}>
+				    <input type="button" value="第三个" @click="tab(3)" :class={active:val==3}>
+				    <keep-alive>
+				      <hehe v-bind:is="currentView"></hehe>//目录树
+				    </keep-alive>
+			   </div>
+				
+				
+				 const home1 = {
+				    template:'<div>第一个模块</div>'
+				  }
+				  const home2 = {
+				    template:'<div>第二个模块</div>'
+				  }
+				  const home3 = {
+				    template:'<div>第三个模块</div>'
+				  }
+				
+				new Vue({
+				    el:'#app',
+				    data:{
+				      currentView:'home1',
+				      val:1
+				    },
+				    components:{
+				      home1,
+				      home2,
+				      home3
+				    },
+				    methods:{
+				      tab(num){
+				        this.currentView = 'home' + num;
+				        this.val = num;
+				      }
+				    }
+				});
+				
+				
+				
+			Vue-cli工具
+				是快速构建单页应用的脚手架
+				// 全局安装 vue-cli
+					npm i vue-cli -g
+				//创建一个基于 webpack 模板的新项目(初始化)
+					vue init webpack 项目名
+				//安装依赖，
+					cd 项目名
+					npm install
+					npm run dev
 	-->
+	<script type="text/javascript">
+		<div id="temp">
+			<ul>
+				<!--<li v-for="val,key in list">{{val}}</li>-->
+				<li v-for="val,key in list">{{key}}:{{val}}</li>
+			</ul>
+		</div>
+		<script src="功能函数/vue.js"></script>
+		<script>
+			//console.log(Vue);
+			var v = new Vue({
+				el:'#temp',
+				data:{
+					//list:[1,2,3,4]
+					list:{
+						a:1,
+						b:2,
+						c:3
+					}
+				},
+				methods:{
+					fn(){}
+				},
+				computed:{
+					fn(){}
+				}
+			})
+			setTimeout(function(){
+				v.list = {
+					a:1,
+					b:2,
+					c:3,
+					d:4,
+					e:5
+				}
+			},2000)
+	</script>
 </body>
 </html>
