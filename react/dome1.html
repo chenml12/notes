@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello World</title>
+	<style type="text/css">
+		.red{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script type="text/javascript" src="src/react.js"></script>
+	<script type="text/javascript" src="src/react-dom.js"></script>
+	<script type="text/javascript" src="src/browser.min.js"></script>
+	<script type="text/javascript">
+		let H=React.createElement('h1',{className:'red'},'Hello World');
+		ReactDOM.render(
+			H,
+			document.getElementById('box')
+		)
+	</script>
+</body>
+</html>

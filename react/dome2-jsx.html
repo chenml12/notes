@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello World</title>
+	<style type="text/css">
+		.red{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script type="text/javascript" src="src/react.js"></script>
+	<script type="text/javascript" src="src/react-dom.js"></script>
+	<script type="text/javascript" src="src/browser.min.js"></script>
+	<script type="text/babel">
+		let Box=React.createClass({
+			render:function(){
+			    return (
+			        <div>
+			          <h1 className="active">你好,世界!</h1>
+			          <div>hehe</div>
+			          <input type="text" />
+			        </div>
+		      	)
+			}
+		});
+		ReactDOM.render(
+			<Box />,
+			document.getElementById('box')
+		)
+	</script>
+</body>
+</html>
