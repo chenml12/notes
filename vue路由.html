@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--
+		Vue-cli工具
+				是快速构建单页应用的脚手架
+				// 全局安装 vue-cli
+					npm i vue-cli -g
+				//创建一个基于 webpack 模板的新项目(初始化)
+					vue init webpack 项目名
+				//安装依赖，
+					cd 项目名
+					npm install
+					npm run dev
+			
+			
+		router路由：
+			//安装vue-router
+				npm i vue-router -S
+				
+			//main.js中引入router等文件
+			import Vue from "vue";
+			import App from "./app"
+			import router from "./router/index";
+			
+				new Vue({
+				  el: '#app',
+				  router,
+				  template: '<App/>',
+				  components: { App }
+				})
+				
+			//app.vue文件写：
+			<template>
+				<div>
+					<router-link to="/hello2" tag="button">切换到hello2</router-link> // tag写想要的标签
+					<keep-alive>
+						<router-view></router-view> //路由渲染的地方
+					</keep-alive>
+				</div>
+			</template>
+			export default {
+				name:'App'
+			}
+			
+			//路由index.js文件里，引入文件
+			import Vue from 'vue';
+			import Router from 'vue-router';
+			
+			import Hello from '@/components/Hello';// @/ => ../
+			import Hello2 from '@/components/Hello2';
+			
+			Vue.use(Router); //中间件
+			
+			let routes=[
+			    {
+			      path: '/',
+			      name: 'Hello',//可有可无
+			      component: Hello
+			    },
+			    {
+			    	path: '/hello2',
+			    	component: Hello2,
+			    	
+			    	//如果有子内容，那么写children；并在Hello2.js文件的template里写:
+			    	<router-link to="/hello2/news1">切换到news1</router-link>
+			    	<router-view></router-view>
+			    	//要是在router-link里面加事件就写：@click.native="fn"
+			    	//路径前面加'/' -> to="/hello2/news1"
+			    	
+			    	children:[
+			    		{
+			    			path: '/hello2/news1',//或 'news1'
+			    			component: news1
+			    		}
+			    	]
+			    }
+			  ]
+			export default new Router({
+				mode:'history',//h5的数据，如果不写，切换时地址栏的效果是hash的形式，写的话，和后端路由相当。
+				routes
+			});
+			
+		
+		动态路由：
+			
+			children:[
+	    		{
+	    			path: '/hello2/news1',//或 'news1'
+	    			component: news1,
+	    			//路径是/hello2/news1/color/数字
+	    			//id只是为了可以通过this.$route.params.id获取到
+	    			children:[
+			    		{
+			    			path: '/hello2/news1/color/:id'
+			    		}
+			    	]
+	    		}
+	    	]
+	    	
+	    	小技巧：
+	    		可以在<router-view></router-view>外包一个<keep-alive></keep-alive>标签
+	    		渲染过的组件会被缓存
+	    	
+	    	router-link标签默认是a标签，
+	    		想要定制就写属性：tag="标签名"；
+	    		属性：to="/news" 或 :to="{path:'/news'}"
+	    		
+	    	重定向；
+	    		redirect
+	    		routes:[
+	    			{
+	    				path:'/news/news1/color/4',
+	    				redirect:'/'		//路径是'/news/news1/color/4'时就跳到主页
+	    			}
+	    		]
+	-->
+</body>
+</html>
