@@ -5,14 +5,105 @@
 	<title>Document</title>
 </head>
 <body>
-	<div class="app">{{message}}</div>
+	<!--
+		vue中的内置指令
+			v-bind     动态的绑定数据，简写为：
+			v-text     更新数据，会覆盖已有的结构
+			v-html     可以解析数据中的html结构
+			v-show     根据值的真假，切换元素的display属性
+			v-if       根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建
+			v-else     条件不符合时渲染  ，没有表达式
+			v-else-if  多条件判断，为真则渲染
+			v-pre      跳过这个元素和它的子元素的编译过程,可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译。
+			v-cloak    隐藏未编译的 Mustache 标签直到实例准备完毕,css中设置[v-cloak] { display: none }
+			v-once     只渲染一次，随后数据更新不重新渲染
+			v-for      基于源数据多次渲染元素或模板块
+			不管是数组还是对象都是通过in来遍历（v-for）
+		                      这个val 数组中的每项:<li v-for="val in list">{{val}}</li>
+		                      如果要找下标
+		        val,index in data
+		     	   <li v-for="val,index in list">{{index}}:{{val}}</li>;
+			      
+		    	如果是对象:
+		     	 val,key in data
+		     	 <li v-for="val,key in list">{{key}}:{{val}}</li>;
+        	v-model
+	        	双向绑定(在表单控件或者组件上创建双向绑定)
+	        	所谓双向绑定,指的就是我们在js中的vue实例中的data与其渲染的dom元素上的内容保持一致，两者无论谁被改变，另一方也会相应的更新为相同的数据。这是通过设置属性访问器实现的
+	        	限制：
+	        		<input>
+					<select>
+					<textarea>
+					components
+	        	<input type="checkbox" v-model="val.check" />
+	        	输入框时：
+					可以有修饰符：
+						.number	输入的字符转为数字类型; 与parseFloat相似，但转不了的话，就是输入的字符串；
+						.trim 去除首尾空格; 
+						修饰符可以连写：v-model.trim.number="XXX"
+				当使用select框的时候，定义一个初始值选择的就是初始值这个
+			    option，当切换option的时候，状态随着内容所改变。
+			         数据本身也进行了改变		
+				
+			v-on:click="事件绑定函数"；v-on:click="fn"
+				缩写：@click="事件绑定函数"
+				事件函数一般写在methods:{}中，里面的this指向实例化对象即v
+					methods:{
+						fn(参数1，$event){
+							//this指向v
+							//可以传参    在不传参的时候，ev就为事件对象
+							//$event就是ev
+						}
+					}
+				 如果事件绑定函数中第一个参数传入了别的值（不是event）
+	     		 那么需要手动添加第二个参数为$event,它就是事件对象
+	     		 
+				@keyup.13=""或@keyup.enter="";回车事件；（写相应的键值）；
+				
+				阻止冒泡：
+					@click.stop="事件函数";
+				阻止默认行为：
+					@click.prevent="事件函数";
+				只触发一次事件
+					@click.once = "事件函数";
+					可以连写：@click.stop.once = "事件函数";
+				
+				
+				修饰符：
+					stop:阻止冒泡
+				    prevent：阻止默认行为
+				    self:只在触发事件元素身上才会调用
+				    once：事件只触发一次
+				    left - (2.2.0) 只当点击鼠标左键时触发。
+				    right - (2.2.0) 只当点击鼠标右键时触发。
+				    middle - (2.2.0) 只当点击鼠标中键时触发。
+			
+			
+			
+	-->
+	<div class="app">
+		<!--v-bind-->
+		<!--<div :curId="id">
+			{{message}}
+		</div>-->
+		
+		<!--v-on-->
+		<!--<div v-on:click="fn"></div>-->
+		
+		<!--v-text-->
+		<!--<span v-text="message"></span>-->
+		<!--v-html-->
+		<span v-html="message"></span>
+		
+	</div>
 	<script type="text/javascript" src="vue.js"></script>
 	<script type="text/javascript">
 		//声明是渲染
 		var vm=new Vue({
-			el:'#temp',//挂载元素选择器
+			el:'.app',//挂载元素选择器
 			data:{//代理数据
-				message:"hello"
+				message:"hello",
+				id:"123"
 			},
 			methods:{//定义方法
 					fn(){}
