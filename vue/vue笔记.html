@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<div class="app">{{message}}</div>
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		//声明是渲染
+		var vm=new Vue({
+			el:'#temp',//挂载元素选择器
+			data:{//代理数据
+				message:"hello"
+			},
+			methods:{//定义方法
+					fn(){}
+				},
+				
+		})
+	</script>
+</body>
+</html>

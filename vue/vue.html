@@ -274,19 +274,19 @@
 					npm install
 					npm run dev
 	-->
-	<script type="text/javascript">
+		<!--模板-->	
 		<div id="temp">
 			<ul>
 				<!--<li v-for="val,key in list">{{val}}</li>-->
 				<li v-for="val,key in list">{{key}}:{{val}}</li>
 			</ul>
 		</div>
-		<script src="功能函数/vue.js"></script>
+		<script src="vue.js"></script>
 		<script>
-			//console.log(Vue);
+			//声明是渲染
 			var v = new Vue({
-				el:'#temp',
-				data:{
+				el:'#temp',//挂载元素选择器
+				data:{//代理数据
 					//list:[1,2,3,4]
 					list:{
 						a:1,
@@ -294,7 +294,7 @@
 						c:3
 					}
 				},
-				methods:{
+				methods:{//定义方法
 					fn(){}
 				},
 				computed:{
