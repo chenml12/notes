@@ -78,13 +78,41 @@
 				    right - (2.2.0) 只当点击鼠标右键时触发。
 				    middle - (2.2.0) 只当点击鼠标中键时触发。
 			
+			字符串模板
+				template 字符串
+				template选项对象的属性
+				模板对象将会  替换   挂载的元素，挂载的元素将被忽略
+				跟节点只能有一个
+				将html结构写在一堆script标签中，设置type="x-template"
 			
+			render函数
+				字符串模板的代替方案，render 函数接收一个 createElement(标签名，[数据对象]，子元素)		
+				
+			  数据对象属性
+			    class:{}  绑定class和v-bind:class一样的API
+			    style：{}  绑定样式和v-bind:style一样的API
+			    attrs:{}   添加行间属性
+			    domProps:{} 添加DOM元素属性
+			    on:{}      绑定事件
+			    
+			    
+			    
+			  	
+				
 			
 	-->
+	<style type="text/css">
+		.red{
+			color:red;
+		}
+		.bg{
+			background: blue;
+		}
+	</style>
 	<div class="app">
 		<!--v-bind-->
 		<!--<div :curId="id">
-			{{message}}
+			{{message?message:''}}
 		</div>-->
 		
 		<!--v-on-->
@@ -92,23 +120,70 @@
 		
 		<!--v-text-->
 		<!--<span v-text="message"></span>-->
-		<!--v-html-->
-		<span v-html="message"></span>
 		
+		<!--v-html-->
+		<!--<span v-html="message"></span>-->
+		<!--<span>22222</span>-->
+		<!--动态添加class-->
+		<!--<div :class={red:addClass}>swroewre</div>-->
 	</div>
 	<script type="text/javascript" src="vue.js"></script>
+	<!--字符串模板-->
+	<!--<script type="x-template" id="temp">
+        <div>
+            hello
+            <span>miaov</span>
+        </div>
+    </script>-->
 	<script type="text/javascript">
 		//声明是渲染
+		var str="<div>1111</div>";
+		let obj = {
+            addClass:true
+        };
 		var vm=new Vue({
 			el:'.app',//挂载元素选择器
 			data:{//代理数据
 				message:"hello",
 				id:"123"
+//				addClass:true
 			},
-			methods:{//定义方法
-					fn(){}
-				},
-				
+//			template:"#temp"
+			render(createElement){
+				return createElement(
+					"ul",
+					{
+						class:{
+							bg:true
+						},
+						style:{
+							fontSize:'50px'
+						},
+						attrs:{
+							abc:"aaaa"
+						},
+						domProps:{
+							innerHTML:"<li>我是html</li>"
+						}
+						
+					},
+					[
+						createElement(
+							"li",
+							1
+						),
+						createElement(
+							"li",
+							2
+						),
+						createElement(
+							"li",
+							3
+						)
+					]
+				)
+			}
+//		
 		})
 	</script>
 </body>

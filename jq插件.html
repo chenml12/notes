@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box .active{
+				background:red;
+			}
+			#box div{
+				display:none;
+				width:200px;
+				height:200px;
+				border:1px solid blue;
+			}
+			#box .show{
+				display:block;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			jQ插件
+				例如：
+				组件写法：
+					$.extend({
+						trimLeft:function(obj){
+							return obj.replace(/\s+/,'')
+						},
+						trimRight:function(obj){
+							return
+						}
+					})
+					调用：$.trimLeft(str);
+			
+			插件写法：	
+				$.fn.extend({
+					//jq里没有scrollHeight
+					scrollHeight:function(){
+						//this指向使用这个方法的对象
+						return this[0].scrollHeight;//转为原生方法
+					}
+				})
+				调用：s('#txt').scrollHeight();
+				
+				
+			h5提供了元素拖拽事件
+				ondragstart
+				ondragenter
+				ondragleave
+				ondragover
+				ondrop
+					鼠标抬起；可以通过ev.dataTransfer.files获取数据
+				ondragend
+				
+		-->
+		
+		<div id="box"></div>
+		
+		<script src="功能函数/jquery-3.2.1.min.js"></script>
+		<script>
+			
+			
+			class tab{
+				constructor(){
+					this.settings={
+						title:[
+							'选项一',
+							'选项二',
+							'选项三'
+						],
+						content:[
+							'内容一',
+							'内容二',
+							'内容三'
+						],
+						events:'click'
+					}
+				}
+			}
+			
+			$.extend(tab.prototype,{
+				
+				init:function(that,obj){
+					$.extend(this.settings,obj);
+					this.createBtn(that);
+					this.creatC(that);
+					this.change(that);
+				},
+				createBtn:function(that){
+					this.settings.title.forEach(function(e,i){
+						if(i === 0){
+							that.append($(`<button class="active">${e}</button>`))
+						}else{
+							that.append($(`<button>${e}</button>`))
+						}
+					})
+				},
+				creatC:function(that){
+					this.settings.content.forEach(function(e,i){
+						if(i === 0){
+							that.append($(`<div class="show">${e}</div>`))
+						}else{
+							that.append($(`<div>${e}</div>`))
+						}
+					})
+				},
+				change:function(that){
+					$('button').on(this.settings.events,function(){
+						$(this).addClass('active').siblings().removeClass('active');
+						that.find('div').eq($(this).index()).show().siblings('div').hide();
+					})
+				}
+			})
+			
+			//自定义选项卡事件(插件)
+			$.fn.extend({
+				tabs:function(obj){
+					let t = new tab();
+					t.init(this,obj);
+				}
+			})
+			
+			
+			$(function(){
+				$('#box').tabs({
+					events:'mouseover'
+				});
+			});
+			
+		</script>
+	</body>
+</html>
