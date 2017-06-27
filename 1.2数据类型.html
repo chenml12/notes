@@ -16,7 +16,28 @@
 		     3.变量.toString  注意：undefined和null不可以（无toString方法）
 		2.任何简单类型转换成Number
 			此转换容易产生NaN，一旦被转换的变量中含有非数字字符，都容易出现NaN
-		
+			(1)Number() 有非数字字符出现NaN
+				字符串转成数字
+				     空字符串---0
+				     忽略前后空格（中间有空格--NaN）
+				     忽略前边的0
+				     转不成纯数字---NaN
+				     null---0
+				     undefined--NaN
+			(2)parseInt()和parseFloat(取整数和取浮点数)
+				空字符串parseInt()和parseFloat()返回NaN，Number("")返回0
+				    空字符串---NaN
+				    忽略前面的0
+				    忽略前后空格
+				    不是数字开头--NaN
+				    忽略第一位非数字后的所有字符
+			(3)任何简单类型转换成Boolean
+				任何数据类型都可以转换成boolean类型，所以和以往两个转换不同；
+				true--1   false---0
+				false（空字符串，0,NaN,null,undefined）其他都为true
+				！取反
+				     快速转布尔值   !！数据
+				     ！=两边值不相等，返回true，相等返回false     
 	-->
 </body>
 </html>
