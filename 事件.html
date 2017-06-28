@@ -107,6 +107,186 @@ ul.onclick = function(ev){
      其他：document.documentElement.scrollTop
     在chrome下可以获取到，但是一直是0
 
+1.事件流/事件模型
+     事件触发的三个阶段
+          捕获阶段
+               从最外层到目标元素     
+          目标阶段
+               目标元素
+          冒泡阶段
+               从目标到元素到最外层
+注意：
+     用on绑定的事件只能在冒泡阶段执行
+     必须是相同事件才会冒泡
+     同一元素的同一事件（用on绑定的）
+     事件函数后绑定的会覆盖前边绑定的
+2. addEventListener
+元素.addEventListener(事件名，函数，布尔值)
+事件监听器绑定事件
+     参数：
+          事件名：string，不带on
+          函数：事件函数，有名或匿名
+          布尔值：默认是false
+               true:捕获阶段调用函数
+               false:冒泡阶段调用函数
+注意：
+     1，匿名函数 不相同
+     2.同一元素的同一事件绑定相同的有名函数，后边覆盖前边，只能绑一个
+     3.同一元素的同一事件可以绑定多个不同函数
+     4.不要随便捕获阶段执行，除非需要提前执行的
+     5.移动端只能用addEventListener绑定事件，不能用on
+     
+3.removeEventListener
+     元素.removeEventListener(事件名，函数，布尔值)
+     移除绑定事件
+     参数：
+          事件名：string，不带on
+          函数：事件函数，有名或匿名
+          布尔值：默认是false
+               
+               true:捕获阶段调用函数
+               false:冒泡阶段调用函数
+注意：
+   1.同一元素的同一函数的同一阶段，才能解绑
+   2.用on和addEventListener不能互相解绑
+arguments.callee,只能在函数内部使用，指向本函数
+
+4.事件对象
+     用来记录事件触发时的相关详细信息
+     事件处理函数的第一形参就是事件对象
+     不同事件的事件对象存的内容也不同
+     比如鼠标的事件对象有坐标信息， 键盘事件对象有键值信息
+function fn(ev){
+     //兼容标准浏览器和ie
+     ev=ev||event;
+}
+5.事件源
+     ev.target
+     触发改事件的元素
+6.事件委托
+     事件源的应用，内存性能优化
+
+//              var lis = document.getElementsByTagName('li');
+//              for(var i=0;i<lis.length;i++){
+//                   lis[i].onclick = function(){
+//                         this.style.background = 'red';
+//                   }
+//              }
+
+
+var ul = document.getElementsByTagName('ul')[0];
+ul.onclick = function(ev){
+      console.log(ev.target.nodeName)
+      ev.target.style.background = 'red'; 
+}
+
+
+7.阻止冒泡
+     ev.cancelBubble=true
+    阻止冒泡阶段后续事件触发
+     ev.stopPropagation()
+     阻止后续进程
+8.阻止默认行为
+     找到默认行为触发事件，阻止
+     1.return false;
+     2.ev.preventDefault()
+    addEventListener只能用ev.preventDefault()
+9.UI事件
+     和浏览器相关
+     load,scroll,resize
+     onload：文档，图片加载完执行事件
+10.onscroll
+    滚动条滚动触发的事件，事件间隔触发的，不是1px触发y一次
+     获取滚动距离
+只能获取不能设置    window.pageYOffset/window.pageXOffset
+设置滚动距离
+     window.scrollTo(x,y)
+可以获取也可以设置
+     chrome:
+     document.body.scrollTop
+     其他是0
+     其他：document.documentElement.scrollTop
+    在chrome下可以获取到，但是一直是0
+11.鼠标事件
+     onclick - 单击事件
+     ondblclick - 双击事件(在极短时间间隔内，连续触发2次click，才会触发双击事件）
+     onmousedown - 鼠标按下
+     onmouseup - 鼠标抬起
+     触发顺序
+          mousedown - mouseup - click
+
+          onmouseover - 鼠标移入，从元素外移入元素内，移入子元素会触发
+     onmouseout - 鼠标移出，从元素内移出元素外，移出子元素会触发
+     
+     onmouseenter - 鼠标移入，从元素外移入，子元素不触发，不冒泡
+     onmouseleave - 鼠标移出，从元素内移出，子元素不触发，不冒泡
+     
+     onmousemove - 鼠标移动，在元素上移动，一定时间间隔触发，不是移动1px触发一次
+     onmousewheel - 鼠标滚轮
+
+12.oncontextmenu
+     上下文菜单被调用是触发，鼠标右键默认是调用上下文菜单
+
+13.鼠标事件对象
+     功能键
+          true:按着    false：没按
+     altKey    shiftKey    ctrlKey
+
+     鼠标事件触发时。鼠标距离可视区左边和上边的距离
+     clientX   clientY
+
+     鼠标事件触发时，鼠标距离文档内容左边和上边的距离，clientY+滚动距离=pageY,ie低版本不兼容，需要获取clientY+滚动距离
+     pageX pageY
+    
+     鼠标事件触发时，鼠标距离浏览器窗口左边和上边的距离
+     screenX
+     screenY
+     
+     鼠标事件触发时，鼠标距离改元素左边和上边的距离，低版本不兼容，clientX-元素到可视区距离=鼠标到元素距离
+     offsetX  offsetY
+     
+     which - 键值
+          chrome下click只有左键触发
+          firefox下click都触发
+          mousedown,3键都触发
+          1左键，2中键，3右键
+
+14.键盘事件
+     不是所有的元素都有键盘事件，只有可输入的元素才会有键盘事件，比如：document，输入框
+     keydown - 按下按键
+          所有按键都会触发，按住不放连续触发
+     keypress - 按下按键
+         功能键不触发 .可输入文本才会触发,按住不放连续触发
+          键值区分大小写
+          65-90：A-Z
+          97-122:  a-z:
+     keyup- 抬起按键
+           所有按键都会触发，抬起瞬间触发一次
+     触发顺序
+     keydown - keypress - keyup
+
+     功能键( true:按着    false：没按)
+          altKey    shiftKey    ctrlKey
+     keyCode - 键值
+          只有键盘事件独有的
+     which - 键值
+          可输入设备都有
+     常用
+     37-左
+     38  -上
+     39 -右
+     40-下
+     13-回车
+     32-空格
+     48-57    0到9
+     65-90   a-z
+15.焦点事件
+     不是所有元素都有焦点事件，只有可交互性的元素才有焦点事件，比如表单控件，a标签
+     页面中只能有一个焦点，当一个元素聚焦，也就意味着另一个元素失焦，焦点默认在document
+     focus - 聚焦事件
+     blur - 失焦事件
+     focus() - 聚焦方法
+     blur() - 失焦方法
 
 	-->
 </body>
