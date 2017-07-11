@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--
+		1. DOM概念
+     DOM：Document Object Model   文档对象模型
+     文档：html页面
+     文档对象：页面的元素
+     文档对象模型：定义  为了能够让程序（js）去操作页面的元素
+
+2.node-节点
+     nodeType     查看节点类型，返回是数字
+     nodeName   查看节点名称，返回的是字符串
+     nodeValue    查看节点内容，返回：没有是null，有是字符串
+
+常用节点：
+     元素节点：1
+     属性节点：2
+     文本节点：3
+     注释节点：8
+     文档节点：9
+
+(1)document文档节点
+     nodeType    9
+     nodeName   #document
+     nodeValue   null
+(2)元素节点
+     nodeType    1
+     nodeName   标签名
+     nodeValue   null
+
+     attributes 属性集合
+     parentNode 父节点
+     childNodes 子节点集合，类数组，动态性
+     children 子元素节点集合
+     firstChild 第一个子节点
+     lastChild 最后一个子节点
+     nextSibling 下一个兄弟节点
+     previousSibling 上一个兄弟节点
+     firstElementChild 第一个子节点
+     lastElementChild 最后一个子节点
+     nextElementSibling 下一个兄弟节点
+     previousElementSibling 上一个兄弟节点
+     
+     classList 操作class
+          add() 添加
+          remove删除
+          toggle()有就删除，没有就添加
+          contains()-有就返回true，没有就返回false
+
+     parentNode.firstElementChild 父级下的第一个元素节点
+     parentNode.lastElementChild 父级下的最后一个元素节点
+     node.nextElementSibling 元素节点的下一个兄弟元素节点
+     node.previousElementSibling 元素节点的上一个兄弟元素节点
+     parentNode.children 所有子元素节点集合
+    node.parentNode 父节点
+          没有就是null，只能使用不能设置
+
+
+
+(3)属性节点
+     nodeType   2
+     nodeName  属性名字符串，小写
+     nodeValue   属性值字符串，小写
+
+(4)文本节点
+     nodeType    3
+     nodeName   #text
+     nodeValue   文本字符串
+(5)注释节点
+     nodeType   8
+     nodeName   #comment
+     nodeValue   内容
+
+   DOM节点的类型有12种：
+Node.ELEMENT_NODE(1);                              
+Node.ATTRIBUTE_NODE(2);                            
+Node.TEXT_NODE(3);                                   
+Node.CDATA_SECTION_NODE(4);
+Node.ENTRY_REFERENCE_NODE(5);
+Node.ENTITY_NODE(6);
+Node.PROCESSING_INSTRUCTION_NODE(7);
+Node.COMMENT_NODE(8);
+Node.DOCUMENT_NODE(9);
+Node.DOCUMENT_TYPE_NODE(10);
+Node.DOCUMENT_FRAGMENT_NODE(11);
+Node.NOTATION_NODE(12);
+
+属性操作
+(1). [ ] 可以获取js添加的自定义属性
+     不可以获取行间的自定义属性
+(2)第三种 不可以获取js添加的自定义属性
+               可以获取行间的自定义属性
+     3种都可以获取到标签固有的属性，比如id
+
+node.getAttribute(’属性名‘) 获取指定属性的属性值
+node.setAttribute（‘属性名’，‘属性值’） 设置指定属性和属性值
+
+创建节点，只能是document
+     document.createElement('标签名')
+     document.createElement('文字')
+插入节点
+parentNode.appendChild(要插入的子节点)       向父节点的最后一位插入子节点
+parentNode.insetBefore(新元素节点，要插入的节点)       向父节点要插入的节点前插入节点
+注意：
+     1.要插入的节点写null，跟appendChild效果一样
+     2.如果插入的节点味已有节点，相当于剪切
+     3.insetBefore的第二个参数，一定要是父节点下的子节点，不然报错
+删除节点
+parentNode.removeChild(子节点)
+替换节点
+parentNode.replaceChild(新节点，要替换的节点)
+克隆节点
+node.cloneNode(true)
+     只能克隆结构，自定义属性和绑定的事件不会克隆
+     true：深度克隆，包括子节点
+     false：浅克隆，默认味false，只克隆自身节点，不包含子节点
+	-->
+</body>
+</html>
