@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<title></title>
+	<style id="css">
+		body{
+			margin:0;
+			padding: 0;
+		}
+		#wrap{
+			overflow: hidden;
+			position: relative;
+		}
+		#list{
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#list li{
+			float: left;
+			
+		}
+		#list li img{
+			width: 100%;
+			display: block;
+		}
+		#nav{
+			position: absolute;
+			left: 0;
+			bottom: 3px;
+			width: 100%;
+			line-height: 10px;
+			text-align: center;
+		}
+		#nav span {
+			height: 10px;
+			width: 10px;
+			display: inline-block;
+			border-radius: 5px;/*移动端尽量不要给百分百，部分手机不支持*/
+			background-color: red;
+			
+		}
+		#nav .active {
+			background: #0F0;
+		}
+		
+	</style>
+	<script type="text/javascript">
+		document.addEventListener(
+		"touchstart",
+		function (e){
+			e.preventDefault();
+		}
+	);
+		window.onload=function(){
+			var wrap=document.querySelector('#wrap');
+			var list=document.querySelector('#list');
+			var lis=list.querySelectorAll('li');
+			var css=document.querySelector('#css');
+			var nav=document.querySelectorAll('#nav span');
+			wrap.style.height=lis[0].offsetHeight+'px';
+			list.style.width=lis.length+'00%'
+			var style="#wrap{height:"+ lis[0].offsetHeight+"px}";
+			style+="#list{width"+lis.length+"00%}";
+			style+="#list li{width:"+(1/lis.length*100)+"%}";
+			css.innerHTML+=style;
+			var startPoint=0;//手指的初始坐标
+			var startX=0;//元素初始位置
+			wrap.addEventListener(
+				'touchstart',
+				function(e){
+					startPoint=e.changedTouches[0].pageX;
+					startX=list.offsetLeft;
+				}
+			);
+			wrap.addEventListener(
+				'touchmove',
+				function(e){
+					var nowPoint=e.changedTouches[0].pageX;
+					var dis=nowPoint - startPoint;
+					var left=startX+dis;
+					list.style.left=left+'px';
+				}
+			);
+			wrap.addEventListener(
+				'touchend',
+				function(e){
+					var left=list.offsetLeft;
+					var now=Math.round(-left/wrap.offsetWidth);
+					left=-now*wrap.offsetWidth;
+					list.style.left=left+'px';
+					for(var i=0; i<nav.length; i++){
+						nav[i].className='';
+					}
+					nav[now].className='active';
+				}
+			);
+			
+				
+		}
+	</script>
+</head>
+<body>
+	<div id="wrap">
+	<ul id="list">
+    	<li>
+        	<a href="#">
+            	<img src="img/1.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/2.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/3.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/4.jpg" />
+            </a>
+        </li>
+        <li>
+        	<a href="#">
+            	<img src="img/5.jpg" />
+            </a>
+        </li>
+    </ul>
+    <nav id="nav">
+    	<span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </nav>
+</div>
+
+</body>
+</html>
