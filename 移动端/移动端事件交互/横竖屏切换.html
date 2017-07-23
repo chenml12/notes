@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	</style>
+	<script type="text/javascript">
+		window.addEventListener('orientationchange',setRem);
+		function setRem(){
+			var html=document.querySelector('html');
+			var width=html.getBoundingClientRect().width;
+			html.style.fontSize=width/16+'px';
+		}
+		
+	</script>
+</head>
+<body>
+	<div></div>
+</body>
+</html>

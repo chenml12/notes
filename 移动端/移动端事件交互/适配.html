@@ -22,7 +22,8 @@
 	        minimum-scale = float_value ,
 	        maximum-scale = float_value ,
 	        user-scalable = [yes | no] ,
-        */
+	        */
+        
        var width=window.screen.width;//屏幕宽度
        var targetW=320;//最终宽度
 	   var scale=width/targetW;
@@ -30,7 +31,7 @@
 	   meta.setAttribute('name', 'viewport');
 	   meta.setAttribute('content', "user-scalable=no,initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale);
 	   document.head.appendChild(meta);
-		
+	
 	</script>
 	<style type="text/css">
 		*{
