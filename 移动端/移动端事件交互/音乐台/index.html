@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+	<script type="text/javascript" src="js/index.js">
+		function(){
+			var html=document.querySelector('html');
+			var width=html.getBoundingClientRect().width;
+			html.style.fontSize=width/16;
+			//1rem等于屏幕宽度的十六分之一;
+			
+		}
+	</script>
+</body>
+</html>
