@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<!--<meta name="viewport" content="width=device-width,user-scalable=no" />-->
 	<title>Document</title>
 	
 	<script type="text/javascript">
@@ -15,7 +15,7 @@
 		
 		//viewport适配
 		/*
-			1. 页面宽度定死 -- 320
+			1. 页面宽度定死 -- 320(body的宽度一直都是320)
 			2. 动态的设置 viewport 把可视区的宽度设置成 320
 	        width = [pixel_value | device-width ] ,
 	        initial-scale = float_value ,
@@ -24,12 +24,22 @@
 	        user-scalable = [yes | no] ,
         */
        var width=window.screen.width;//屏幕宽度
+       var targetW=320;//最终宽度
+	   var scale=width/targetW;
+	   var meta=document.createElement("meta");
+	   meta.setAttribute('name', 'viewport');
+	   meta.setAttribute('content', "user-scalable=no,initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale);
+	   document.head.appendChild(meta);
 		
 	</script>
 	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
 		div{
-			width:10rem;
-			height: 10rem;
+			width:100px;
+			height: 100px;
 			background: red;
 		}
 		
