@@ -26,13 +26,132 @@
 				<a href="javascript:;" id="menuBtn" class="menuBtnClos"></a>
 				<nav id="btns">
 					<a href="javascript:;" class="searchBtn">搜索</a>
-					<a href="javascript:;">登录</a>
+					<a href="javascript:;">登陆</a>
 					<a href="javascript:;">注册</a>
 				</nav>
 			</div>
+			<form class="search">
+				<input type="text" placeholder="请输入搜索内容" />
+				<input type="submit" value="搜索" />
+			</form>
+			<ul id="nav">
+				<li>
+		            <a href="javascript:void(0);" class="" data-tab="index">首页</a>
+		        </li>
+		        <li>
+		            <a href="javascript:void(0);" data-tab="mv" class="">MV</a>
+		        </li>
+		        <li>
+		            <a href="javascript:void(0);" data-tab="pl" class="">悦单</a>
+		        </li>
+		        <li>
+		            <a href="javascript:void(0);" data-tab="vchart" class="">V榜</a>
+		        </li>
+			    <li><a href="http://zhongchou.yinyuetai.com/wap" class="">众筹</a></li>
+		        <li>
+		            <a href="http://www.yinyuetai.com/fanMass" data-tab="wapfan" class="">饭团</a>
+		        </li>
+		        <li>
+		            <a href="javascript:void(0);" data-tab="program" class="">节目</a>
+		        </li>
+		        <li>
+		            <a href="javascript:void(0);" data-tab="stage" class="">音悦stage</a>
+		        </li>
+		        <li>
+		            <a href="javascript:void(0);" data-tab="apps/mobile" class="">APP下载</a>
+		        </li>
+		        <li>
+		            <a href="http://news.yinyuetai.com/" target="_blank" class="">资讯</a>
+		        </li>
+		        <li>
+		            <a href="http://i.yinyuetai.com" target="_blank" class="selected">我的家</a>
+		        </li>
+		        <li>
+		            <a href="javascript:void(0);" data-tab="apps" class="">热门应用</a>
+		        </li>
+			</ul>
 		</header>
-		
+		<div class="content">
+			<nav id="navScroll">
+				<ul id="navs">
+					<li class="active">
+			            <a href="javascript:void(0);" class="" data-tab="index">首页</a>
+			        </li>
+			        <li>
+			            <a href="javascript:void(0);" data-tab="mv" class="">MV</a>
+			        </li>
+			        <li>
+			            <a href="javascript:void(0);" data-tab="pl" class="">悦单</a>
+			        </li>
+			        <li>
+			            <a href="javascript:void(0);" data-tab="vchart" class="">V榜</a>
+			        </li>
+				    <li><a href="http://zhongchou.yinyuetai.com/wap" class="">众筹</a></li>
+			        <li>
+			            <a href="http://www.yinyuetai.com/fanMass" data-tab="wapfan" class="">饭团</a>
+			        </li>
+			        <li>
+			            <a href="javascript:void(0);" data-tab="program" class="">节目</a>
+			        </li><li>
+			            <a href="javascript:void(0);" data-tab="program" class="">节目</a>
+			        </li>
+			        <li>
+			            <a href="javascript:void(0);" data-tab="stage" class="">音悦stage</a>
+			        </li>
+			        <li>
+			            <a href="javascript:void(0);" data-tab="apps/mobile" class="">APP下载</a>
+			        </li>
+			        <li>
+			            <a href="http://news.yinyuetai.com/" target="_blank" class="">资讯</a>
+			        </li>
+			        <li>
+			            <a href="http://i.yinyuetai.com" target="_blank" class="selected">我的家</a>
+			        </li>
+			        <li>
+			            <a href="javascript:void(0);" data-tab="apps" class="">热门应用</a>
+			        </li>
+				</ul>
+			</nav>
+			<div id="picTab">
+				<ul id="picList">
+			    	<li>
+			        	<a href="#">
+			            	<img src="img/img1.jpg" />
+			            </a>
+			        </li>
+			        <li>
+			        	<a href="#">
+			            	<img src="img/img2.jpg" />
+			            </a>
+			        </li>
+			        <li>
+			        	<a href="#">
+			            	<img src="img/img3.jpg" />
+			            </a>
+			        </li>
+			        <li>
+			        	<a href="#">
+			            	<img src="img/img4.jpg" />
+			            </a>
+			        </li>
+			    </ul>
+			    <nav id="picNav">
+			    	<span class="active"></span>
+			        <span></span>
+			        <span></span>
+			        <span></span>
+			    </nav>
+			</div>
+
+		</div>
 	</section>
+	<script src="js/transform.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript">
+		 navShow();
+		 navSwipe();
+		 scrollPic();
+	</script>
+	 
 </body>
 </html>

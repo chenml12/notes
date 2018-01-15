@@ -30,12 +30,14 @@ input,
 button {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-appearance: none;
+	outline: none;
 }
 html,
 body {
 	height: 100%;
 	position: relative;
 	overflow: hidden;
+	background: #eee;
 }
 .wrap {
 	height: 100%;
@@ -43,10 +45,11 @@ body {
 }
 #header {
 	position: absolute;
-	background: rgba(0, 0, 0, .6);
+	background: rgba(0, 0, 0, .8);
 	left: 0;
 	top: 0;
 	width: 100%;
+	z-index: 2;
 }
 .headerC {
 	height: 135/@rem;
@@ -94,4 +97,124 @@ body {
     width: 130/@rem;
     line-height: 88/@rem;
     border-radius: 10/@rem;
+    font-weight: bold;
+}
+.search{
+    height: 103/@rem;
+    padding: 16/@rem;
+}
+.search input[type="text"]{
+    float: left;
+    width: 829/@rem;
+    height: 103/@rem;
+    background: #999;
+    padding: 5px 10px;
+    border: 1px solid #5a5a5a;
+    box-sizing: border-box;
+    font-size: 6/@rem;
+    color: #333;
+    border-radius: 15/@rem 0 0 15/@rem;
+}
+.search input[type="text"]:focus{
+    background: #fff;
+}
+.search input[type="text"]::-webkit-input-placeholder{
+    color: #333;
+}
+.search input[type="submit"]{
+    width: 203/@rem;
+    height: 103/@rem;
+    float: right;
+    border: none;
+    color:#fff ;
+    background: #414040;
+    border-radius:0 15/@rem 15/@rem 0 ;
+    font-size: 52/@rem;
+}
+#nav{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 135/@rem;
+    border-top: 1px solid #5A5A5A;
+    background: rgba(0,0,0,0.8);
+    padding:10/@rem 0;
+    display: none;
+}
+#nav li{
+    float: left;
+    width: 22.5%;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    text-align: center;
+    
+}
+#nav li a{
+    color: #fff;
+}
+.content{
+    padding-top: 270/@rem;
+    position: relative;
+    z-index: 1;
+}
+#navScroll{
+    height: 177/@rem;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 31/@rem 0 14/@rem;
+    overflow: hidden;
+}
+#navs{
+    height: 129/@rem;
+    white-space: nowrap;
+    font-size: 0;
+    float: left;
+}
+#navs li{
+    display: inline-block;
+    padding: 0 38/@rem;
+    line-height: 129/@rem;
+    font-size: 70/@rem;
+}
+#navs a {
+  color: #020202;
+}
+#navs .active {
+  background: #690;
+}
+#navs .active a {
+  color: #fff;
+}
+#picTab {
+  overflow: hidden;
+  position: relative;
+}
+#picList {
+  width: 400%;
+}
+#picList li {
+  float: left;
+  width: 25%;
+}
+#picList img {
+  width: 100%;
+  display: block;
+}
+#picNav {
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 100%;
+  line-height: 10px;
+  text-align: center;
+}
+#picNav span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #C00;
+  border-radius: 5px;
+}
+#picNav .active {
+  background: #0F0;
 }
